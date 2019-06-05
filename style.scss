@@ -1,0 +1,107 @@
+$main-color: #FF7700;
+$background-color: #EDEDED;
+$main-font-color: #2B2B2B;
+$golden: #FCCA03;
+$separator: #666666;
+@mixin ring($size, $color) {
+    border-radius: 50%;
+    height: $size;
+    width: $size;
+    vertical-align: -50%;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: $size/50 $size/50 $size/50 darken($color, 10%), inset $size/50 $size/50 $size/50 darken($color, 10%);
+    border: $size/11 solid $color;
+}
+
+body {
+    font-size: calc(1rem + 1vw);
+}
+
+h2 {
+    font-size: calc(15px + 1vw);
+    margin: 4vw auto;
+}
+
+.row {
+    margin: 18px auto;
+}
+
+
+/* Navbar                                 */
+
+.navbar.navbar-expand-lg {
+    background-color: $main-color;
+    padding: 0em 1em !important;
+    .nav-link {
+        color: white;
+        font-size: 17px;
+        &:hover {
+            color: white;
+            text-decoration: underline white;
+        }
+    }
+    .navbar-nav,
+    .nav-item {
+        margin-left: auto;
+    }
+    .fa-bars {
+        color: white;
+    }
+    .nav-item:not(:last-of-type) {
+        @media (min-width: 992px) {
+            border-right: 1px solid white;
+            width: 120px;
+        }
+    }
+}
+
+
+/* Section                                */
+
+section {
+    background-color: $background-color;
+    color: $main-font-color;
+    padding: 15px;
+    min-height: 70vh;
+}
+
+
+/* Footer                                 */
+
+footer.row {
+    background-color: $main-color;
+    margin: 0;
+    ul {
+        list-style-type: none;
+    }
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.surrounded-title {
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        margin: 0 10px;
+        @include ring(45px, $main-color);
+    }
+}
+
+.one-ring {
+    &:before {
+        content: "";
+        display: block;
+        margin: 0 10px;
+        @include ring(150px, $golden);
+    }
+}
+
+@for $i from 1 through 6 {
+    .chained-ring:nth-of-type(#{$i}) {
+        @include ring(35px * (1+($i/3)), $separator);
+        margin-right: -((35px * (1+($i/2)))*0.35);
+    }
+}
